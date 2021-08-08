@@ -49,3 +49,40 @@ jobs:
           siddacr.azurecr.io/myakscluster:${{ github.sha }}
         imagepullsecrets: |
           myaksclusterdockerauth
+  securitytest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        name: Check out code
+
+    # Software Composition Analysis
+      - name: Downloading Dependency check tool
+        run: wget https://github.com/jeremylong/DependencyCheck/releases/download/v6.2.2/dependency-check-6.2.2-release.zip 
+    
+      - name: Unzipping archive and installing
+        run: unzip dependency-check-6.2.2-release.zip && ls -l && dependency-check/bin/dependency-check.sh -s .
+
+   # Automated Code Scan       
+      - name: DevSkim Scan
+        uses: microsoft/DevSkim-Action@v1
+      - uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: devskim-results.sarif
+
+  # Sensitive Information Scan
+      - name: Trufflehog Actions Scan
+        uses: edplato/trufflehog-actions-scan@master
+
+  # Static Code Analysis
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.SONAR_GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+  
+  # Dynamic Code Analysis
+  #    - name: ZAP Scan
+   #     uses: zaproxy/action-full-scan@v0.2.0
+    #    with:
+     #     target: 'http://test-environment.eba-qyt4dziw.us-east-1.elasticbeanstalk.com/'
