@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "myakscluster-1866"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "myakscluster-1866"
+  template:
+    metadata:
+      labels:
+        app: "myakscluster-1866"
+    spec:
+      containers:
+        - name: "myakscluster-1866"
+          image: "siddacr.azurecr.io/myakscluster"
+          ports:
+          - containerPort: 80
