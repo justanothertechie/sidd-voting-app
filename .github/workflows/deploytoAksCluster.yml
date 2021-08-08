@@ -82,7 +82,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
   
   # Dynamic Code Analysis
-  #    - name: ZAP Scan
-   #     uses: zaproxy/action-full-scan@v0.2.0
-    #    with:
-     #     target: 'http://test-environment.eba-qyt4dziw.us-east-1.elasticbeanstalk.com/'
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.2.0
+        with:
+          target: 'http://52.146.62.222/'
