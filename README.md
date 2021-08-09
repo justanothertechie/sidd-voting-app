@@ -1,5 +1,7 @@
 **DevSecOps project for a Voting application.**
 
+[![.github/workflows/deploytoAksCluster.yml](https://github.com/justanothertechie/sidd-voting-app/actions/workflows/deploytoAksCluster.yml/badge.svg)](https://github.com/justanothertechie/sidd-voting-app/actions/workflows/deploytoAksCluster.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=justanothertechie_sidd-voting-app&metric=alert_status)](https://sonarcloud.io/dashboard?id=justanothertechie_sidd-voting-app)
 
 **References**:
 
